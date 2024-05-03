@@ -15,8 +15,11 @@ class HashMap
 	int m_elementsCount;
 	int m_size;
 	double m_loadFactor;
+
+	void rehash();
 public:
 	HashMap(int size = 10);
+
 	void insert(const pair& p);
 	bool find(const keyType& key);
 	void erase(const keyType& key);

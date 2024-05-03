@@ -8,9 +8,22 @@ HashMap<keyType, valType, hashFunc>::HashMap(int size)
 }
 
 template<typename keyType, typename valType, typename hashFunc>
+void HashMap<keyType, valType, hashFunc>::rehash()
+{
+	m_table.clear();
+	m_table.resize((7 * m_size) / 4);
+
+	for (const auto& pair : m_list)
+	{
+		insert(pair);
+	}
+}
+
+template<typename keyType, typename valType, typename hashFunc>
 void HashMap<keyType, valType, hashFunc>::insert(const pair& p)
 {
 	std::size_t index = hashFunc(p.first) % m_size;
+	m_elementsCount++;
 
 	if (m_table[index] == nullptr)
 	{
@@ -20,5 +33,11 @@ void HashMap<keyType, valType, hashFunc>::insert(const pair& p)
 	else
 	{
 		m_list.insert(m_table[index], pair);
+	}
+
+	m_loadFactor = m_elementsCount / m_size;
+	if (m_loadFactor > 1.0)
+	{
+		rehash();
 	}
 }
