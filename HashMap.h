@@ -1,4 +1,3 @@
-#pragma once
 #include <vector>
 #include <list>
 #include <iostream>
@@ -133,7 +132,11 @@ void HashMap<keyType, valType, hashFunc>::insert(const pair& p)
 		//check if it is already inserted
 		while (bucketLength--)
 		{
-			if (it->first == p.first) return;
+			if (it->first == p.first)
+			{
+				it->second = p.second;
+				return;
+			}
 		}
 
 		m_elementsCount++;
@@ -153,7 +156,7 @@ template<typename keyType, typename valType, typename hashFunc>
 bool HashMap<keyType, valType, hashFunc>::find(const keyType& key)
 {
 	std::size_t index = hashFunc()(key) % m_size;
-	const bucket bucketToSearch = m_table[index];
+	const bucket& bucketToSearch = m_table[index];
 	int bucketLength = m_table[index].second;
 
 	if (bucketToSearch.first.second == false) return false;
