@@ -58,4 +58,4 @@ This project was created for study purposes. Contributions are welcome but not a
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
