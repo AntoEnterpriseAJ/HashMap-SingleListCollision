@@ -1,6 +1,8 @@
-# HashMap Implementation with Separate Chaining
+# HashMap Implementation using a single list for colission handling
 
-This repository contains a C++ implementation of a hash map utilizing separate chaining to resolve collisions. Separate chaining is a method where each bucket of the hash table contains a linked list of elements that hash to the same index. In this implementation, a single large linked list is used to store all elements, and a vector of pointers to the node before the start of each bucket is employed for quick access.
+This repository contains a C++ implementation of a hash map utilizing a single list for handling colissions. In this implementation, a single large linked list is used to store all elements, and a vector of pointers to the node before the start of each bucket is employed for quick access.
+
+![hashmap](https://github.com/AntoEnterpriseAJ/HashMap-SingleListCollision/assets/152036671/7b2e9f38-66f7-4148-a63a-92787eb00d02)
 
 ## Features
 
