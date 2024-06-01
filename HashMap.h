@@ -5,11 +5,25 @@
 template <typename keyType, typename valType, typename hashFunc = std::hash<keyType>>
 class HashMap
 {
-	static constexpr double resizeFactor = 7.0 / 4;
+public:
 	using pair = std::pair<keyType, valType>;
 	using iterator = typename std::list<pair>::iterator;
 	using startPointer = std::pair<iterator, bool>;
 	using bucket = std::pair<startPointer, int>;
+
+	HashMap(int size = 10);
+
+	iterator begin() { return std::next(m_list.begin()); }
+	iterator end() { return m_list.end(); }
+
+	void insert(const pair& p);
+	bool find(const keyType& key) const;
+	void erase(const keyType& key);
+	void printBuckets() const;
+	valType& operator[](keyType key);
+
+private:
+	static constexpr double resizeFactor = 7.0 / 4;
 
 	std::vector<bucket> m_table;
 	std::list<pair> m_list;
@@ -18,17 +32,6 @@ class HashMap
 	double m_loadFactor;
 
 	void rehash();
-public:
-	HashMap(int size = 10);
-
-	iterator begin() { return std::next(m_list.begin()); }
-	iterator end() { return m_list.end(); }
-
-	void insert(const pair& p);
-	bool find(const keyType& key);
-	void erase(const keyType& key);
-	void printBuckets() const;
-	valType& operator[](keyType key);
 };
 
 template<typename keyType, typename valType, typename hashFunc>
@@ -153,7 +156,7 @@ void HashMap<keyType, valType, hashFunc>::insert(const pair& p)
 }
 
 template<typename keyType, typename valType, typename hashFunc>
-bool HashMap<keyType, valType, hashFunc>::find(const keyType& key)
+bool HashMap<keyType, valType, hashFunc>::find(const keyType& key) const
 {
 	std::size_t index = hashFunc()(key) % m_size;
 	const bucket& bucketToSearch = m_table[index];
